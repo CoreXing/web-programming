@@ -6,26 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CoreXin's web</title>
     <style type="text/css">
-        .test{
-            overflow:hidden;
-        }
         div.content{
             overflow:auto;
             resize:both;
         }
         img{
             border-radius:50%;
+            max-width:100%;
             display: block;
             margin: 0 auto;
         }
         .photo{
             float:left;
             width:25%;
+            height:100vh;
             background-color: #18B7B1;
         }
         .text{
+            overflow-y:auto;
             float:right;
             width:75%;
+            height:100vh;
             background-color: #F9F7F0;
         }
         #nav{
@@ -35,16 +36,14 @@
             vertical-align: middle;
         }
         #nav li{
-            display:inline;
             line-height: 40px;
+            display:inline;
             color: #072A40;
-            padding: 20px 20px;
         }
         #nav a{
-            line-height: 40px;
             color: #fff;
             text-decoration: none;
-            padding: 10px 10px;
+            padding: 10px 15px;
         }
         #nav a:hover{
             background-color:#178CA4;
@@ -61,13 +60,22 @@
         }
     </style>
 </head>
-<body class = "test">
+<body>
     <div class = "content">
         <h1 align="center">我的個人檔案</h1>
+        <div style = "text-align:center;">
+            <ul id = "nav">
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="LAB01/lab01.html">學校介紹</a></li>
+                <li><a href="LAB03/Schedule.html">課程表</a></li>
+                <li><a href="homepage/mimi.html">網頁作品</a></li>
+                <li><a href="LAB01/hello.html">其他連結</a></li>
+            </ul>
+        </div>
         <div class = "photo">
-            <div class = "circle">
+            <div>
                 <a href="https://www.facebook.com/profile.php?id=100004288922159">
-                    <img src="貓.jpg" title = "喵喵喵~" alt="這是一隻貓貓" width = 300px>
+                    <img src="LAB03/貓.jpg" title = "喵喵喵~" alt="這是一隻貓貓">
                 </a>
             </div>
             <h1 align="center"><font color="#FFDEFF">林星主</font></h1>
@@ -81,15 +89,6 @@
             </p>
         </div>
         <div class = "text">
-            <div>
-                <ul id = "nav">
-                    <li><a href="index.html">首頁</a></li>
-                    <li><a href="LAB01/lab01.html">學校介紹</a></li>
-                    <li><a href="Schedule.html">課程表</a></li>
-                    <li><a href="homepage/mimi.html">網頁作品</a></li>
-                    <li><a href="hello.html">其他連結</a></li>
-                </ul>
-            </div>
             <h2>自我介紹</h2>
                 <p>我的名字叫<b>林星主</b>，從小住在<u>南投</u>，直到上了高中搬到了<u>彰化</u>。</p>
             <hr/>
