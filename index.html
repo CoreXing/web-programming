@@ -1,125 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CoreXin's web</title>
-    <style type="text/css">
-        div.content{
-            overflow:auto;
-            resize:both;
-        }
-        img{
-            border-radius:50%;
-            max-width:100%;
-            display: block;
-            margin: 0 auto;
-        }
-        .photo{
-            float:left;
-            width:25%;
-            height:100vh;
-            background-color: #18B7B1;
-        }
-        .text{
-            overflow-y:auto;
-            float:right;
-            width:75%;
-            height:100vh;
-            background-color: #F9F7F0;
-        }
-        #nav{
-            margin: auto;
-            height: 40px;
-            background-color: #18B7B1;
-            vertical-align: middle;
-        }
-        #nav li{
-            line-height: 40px;
-            display:inline;
-            color: #072A40;
-        }
-        #nav a{
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 15px;
-        }
-        #nav a:hover{
-            background-color:#178CA4;
-            color: #FFECEF;
-        }
-        a.A {
-            color: #128C8C;
-        }
-        a.B {
-            color: #00C200;;
-        }
-        a.C {
-            color: #FF8C8C;
-        }
-    </style>
-</head>
-<body>
-    <div class = "content">
-        <h1 align="center">我的個人檔案</h1>
-        <div style = "text-align:center;">
-            <ul id = "nav">
-                <li><a href="index.html">首頁</a></li>
-                <li><a href="LAB01/lab01.html">學校介紹</a></li>
-                <li><a href="LAB03/Schedule.html">課程表</a></li>
-                <li><a href="homepage/mimi.html">網頁作品</a></li>
-                <li><a href="LAB01/hello.html">其他連結</a></li>
-            </ul>
-        </div>
-        <div class = "photo">
-            <div>
-                <a href="https://www.facebook.com/profile.php?id=100004288922159">
-                    <img src="LAB03/貓.jpg" title = "喵喵喵~" alt="這是一隻貓貓">
-                </a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>web</title>
+        <style>
+            .container {
+              position: relative;
+              width: 50%;
+            }
+            .image {
+              opacity: 1;
+              display: block;
+              width: 100px;
+              height: auto;
+              transition: .5s ease;
+              backface-visibility: hidden;
+              border-radius:50%;
+            }
+
+            .middle {
+              transition: .5s ease;
+              opacity: 0;
+              position: absolute;
+              top: 85%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              text-align: center;
+            }
+
+            .container:hover .image {
+              opacity: 0.3;
+            }
+
+            .container:hover .middle {
+              opacity: 1;
+            }
+
+            .text {
+              background-color: #BFBFBF;
+              color: #7F00DB;
+              font-size: 16px;
+              padding: 1px 32px;
+              border-radius:50%;
+            }
+        </style>
+    </head>
+    <body style = "background:#EDEDED;">
+        <div class="container">
+            <img class="image" src="LAB04/貓.png" alt="Avatar" style="width:100%" usemap="#workmap">
+            <div class="middle">
+                <div class="text">
+                    I am CAT.
+                </div>
             </div>
-            <h1 align="center"><font color="#FFDEFF">林星主</font></h1>
-            <hr/>
-            <h3>聯絡方式</h3>
-            <p>
-                <i>Email:</i><a href = "mailto:o20741697@gmail.com">o20741697@gmail.com</a></h>
-            </p>
-            <p>
-                <i>Phone:</i><a href="tel:02-27712171">02-27712171</a>
-            </p>
         </div>
-        <div class = "text">
-            <h2>自我介紹</h2>
-                <p>我的名字叫<b>林星主</b>，從小住在<u>南投</u>，直到上了高中搬到了<u>彰化</u>。</p>
-            <hr/>
-            <h2>學歷</h2>
-                <ul>
-                    <li>虎山國小</li>
-                    <li>草屯國小</li>
-                    <li>市立臺中工業高級中等學校</li>
-                    <li>國立台北科技大學</li>
-                </ul>
-            <hr/>
-            <h2>個人經歷</h2>
-                <ol>
-                    <li>退休台中高工行義童軍團聯隊長兼美宣</li>
-                    <li>退休台中高工工科賽數位電子選手</li>
-                    <li>北科大資工系大二學生</li>
-                    <li>夢想一號魔方學院講師</li>
-                </ol>
-            <hr/>
-            <h2>程式語言</h2>
-                <ol>
-                    <a href="https://www.python.org/" class = "A"><li>Python</li></a>
-                    <a href="https://www.csie.ntu.edu.tw/~b98902112/cpp_and_algo/cpp/README.html" class = "B"><li>C/C++</li></a>
-                    <a href="https://zh.wikipedia.org/zh-tw/VHDL" class = "C"><li>VHDL</li></a>
-                </ol>
-            <hr/>
-            <h2>其他</h2>
-                <a href="https://corexing.github.io/110590056/">這是我的網站</a>
-                <br>
-                <a href="https://www.youtube.com/watch?v=1q82twrdr0U">好歌推薦</a>
-        </div>
-    </div>
-</body>
+        <map name="workmap">
+            <area shape="circle" coords="140,75,50" alt="Cup of coffee" href="cat.html">
+        </map>
+    </body>
 </html>
