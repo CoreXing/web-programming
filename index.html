@@ -1,64 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>web</title>
-        <style>
-            .container {
-              position: relative;
-              width: 50%;
-            }
-            .image {
-              opacity: 1;
-              display: block;
-              width: 100px;
-              height: auto;
-              transition: .5s ease;
-              backface-visibility: hidden;
-              border-radius:50%;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+    <style>
+        del{
+            background:tomato
+        }
+        ins{
+            background:yellow
+        }
+        div.content{
+            overflow:auto;
+            resize:both;
+            width:80%;
+        }
+        .green{
+            float:left;
+            width:50%;
+            background:mediumseagreen;
+        }
+        .blue{
+            float:right;
+            width:50%;
+            background:dodgerblue;
+        }
+        .photo_L{
+            float:left;
+            width:49%;
 
-            .middle {
-              transition: .5s ease;
-              opacity: 0;
-              position: absolute;
-              top: 85%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              -ms-transform: translate(-50%, -50%);
-              text-align: center;
+            filter: brightness();
+        }
+        .photo_R{
+            float:right;
+            width:49%;
+        }
+        img.nochange{
+            border:2px red solid;
+        }
+        img.change{
+            border:2px red solid;
+            filter: sepia()
+        }
+        #nav{
+            margin: 15px auto;
+            height: 40px;
+            background-color: #690;
+        }
+        #nav li{
+            display:inline;
+            line-height: 40px;
+            color: #FFF;
+            padding: 20px 20px;
+        }
+        #nav a{
+            line-height: 40px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 10px;
+        }
+        #nav a:hover{
+            background-color:#060;
+        }
+        #switch{
+            margin: 15px auto
+        }
+        #switch li{
+            display:inline;
+        }
+    </style>
+    <script>
+        function init(){
+            document.getElementById("score").width = "100px";
+            document.getElementById("score").border = 1;
+            var tr = document.getElementsByTagName("td");
+            for(var i=0;i<tr.length;i++){
+                tr[i].bgColor = "white";
             }
-
-            .container:hover .image {
-              opacity: 0.3;
+        }
+        function chgTableW(number){
+            document.getElementById("score").width = number;
+        }
+        function chgBandSW(number){
+            document.getElementById("score").border = number;
+        }
+        function chgColor(color){
+            var tr = document.getElementsByTagName("td");
+            for(var i=3;i<tr.length;i++){
+                tr[i].bgColor = color;
             }
-
-            .container:hover .middle {
-              opacity: 1;
-            }
-
-            .text {
-              background-color: #BFBFBF;
-              color: #7F00DB;
-              font-size: 16px;
-              padding: 1px 32px;
-              border-radius:50%;
-            }
-        </style>
-    </head>
-    <body style = "background:#EDEDED;">
-        <div class="container">
-            <img class="image" src="LAB04/貓.png" alt="Avatar" style="width:100%" usemap="#workmap">
-            <div class="middle">
-                <div class="text">
-                    I am CAT.
-                </div>
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <ul id = "nav">
+            <li><a href="hello.html">首頁</a></li>
+            <li><a href="test_file/test.html">課程介紹</a></li>
+            <li><a href="hello.html">師資陣容</a></li>
+            <li><a href="hello.html">新聞動態</a></li>
+            <li><a href="hello.html">其他內容</a></li>
+        </ul>
+    </div>
+    <div>
+        <p>
+            It is <del>red</del> and <ins>yellow</ins>.
+        </p>
+        <div class = "content">
+            <div class = "green">
+                <ul>
+                    <li>List1</li>
+                    <li>List2</li>
+                </ul>
+            </div>
+            <div class = "blue">
+                <ol>
+                    <li>List1</li>
+                    <li>List2</li>
+                </ol>
             </div>
         </div>
-        <map name="workmap">
-            <area shape="circle" coords="140,75,50" alt="Cup of coffee" href="cat.html">
-        </map>
-    </body>
+    </div>
+    <div>
+        <div class = "photo_L">
+            <img class = "nochange"src="鯊魚.jpg" width = 100%>
+        </div>
+        <div class = "photo_R">
+            <img class = "change" src="鯊魚.jpg" width = 100%>
+        </div>
+    </div>
+
+    <table id = "score">
+        <tr align="center">
+            <td>75</td>
+            <td>80</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>95</td>
+            <td>80</td>
+            <td>70</td>
+        </tr>
+        <tr>
+            <td>100</td>
+            <td>98</td>
+            <td>60</td>
+        </tr>
+    </table>
+    <p>Table Width</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgTableW(200)" value = "200px"></li>
+        <li><input type="button" onclick = "chgTableW(500)" value = "500px"></li>
+    </ul>
+    <p>Border and Spacing width</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgBandSW(1)" value = "1px"></li>
+        <li><input type="button" onclick = "chgBandSW(10)" value = "10px"></li>
+        <li><input type="button" onclick = "chgBandSW(20)" value = "20px"></li>
+    </ul>
+    <p>Color</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgColor('green')" value = "  " style = "background:green;"></li>
+        <li><input type="button" onclick = "chgColor('yellow')" value = "  " style = "background:yellow;"></li>
+        <li><input type="button" onclick = "chgColor('blue')" value = "  " style = "background:blue;"></li>
+        <li><input type="button" onclick = "chgColor('orange')" value = "  " style = "background:orange;"></li>
+    </ul>
+    <input type="reset" onclick = "init()"></button>
+    <script>init();</script>
+</body>
 </html>
