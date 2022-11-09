@@ -1,23 +1,87 @@
-<!-- HTML Lab Assignment 5 -->
-<!-- Deadline: 2022-11-09 23:59 -->
-
-<!-- [10%] 1. A Table (3x3 cells) with two different background colors for <th> and <td> -->
-<!-- [20%] 2. Two buttons to control the width of the table (200px, 500 px) -->
-<!-- [20%] 3. Three buttons to control the border with and cell spacing of the table -->
-<!-- [20%] 4. Four buttons to control the background color of the table (will not affect the color of table headings)-->
-<!-- [20%] 5. A reset button to reset the style to the original.-->
-<!-- [10%] 6. Separate the JavaScript code from the html file and upload both files to github. (javascript in an external file) -->
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
 </head>
-
 <body>
-    <!-- Write your Html code here -->
-    <script src="./script.js"></script>
-</body>
+    <div>
+        <ul id = "nav">
+            <li><a href="hello.html">首頁</a></li>
+            <li><a href="test_file/test.html">課程介紹</a></li>
+            <li><a href="hello.html">師資陣容</a></li>
+            <li><a href="hello.html">新聞動態</a></li>
+            <li><a href="hello.html">其他內容</a></li>
+        </ul>
+    </div>
+    <div>
+        <p>
+            It is <del>red</del> and <ins>yellow</ins>.
+        </p>
+        <div class = "content">
+            <div class = "green">
+                <ul>
+                    <li>List1</li>
+                    <li>List2</li>
+                </ul>
+            </div>
+            <div class = "blue">
+                <ol>
+                    <li>List1</li>
+                    <li>List2</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class = "photo_L">
+            <img class = "nochange"src="鯊魚.jpg" width = 100%>
+        </div>
+        <div class = "photo_R">
+            <img class = "change" src="鯊魚.jpg" width = 100%>
+        </div>
+    </div>
 
+    <table id = "score">
+        <tr align="center">
+            <td>75</td>
+            <td>80</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>95</td>
+            <td>80</td>
+            <td>70</td>
+        </tr>
+        <tr>
+            <td>100</td>
+            <td>98</td>
+            <td>60</td>
+        </tr>
+    </table>
+    <p>Table Width</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgTableW(200)" value = "200px"></li>
+        <li><input type="button" onclick = "chgTableW(500)" value = "500px"></li>
+    </ul>
+    <p>Border and Spacing width</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgBandSW(1)" value = "1px"></li>
+        <li><input type="button" onclick = "chgBandSW(10)" value = "10px"></li>
+        <li><input type="button" onclick = "chgBandSW(20)" value = "20px"></li>
+    </ul>
+    <p>Color</p>
+    <ul id = "switch">
+        <li><input type="button" onclick = "chgColor('green')" value = "  " style = "background:green;"></li>
+        <li><input type="button" onclick = "chgColor('yellow')" value = "  " style = "background:yellow;"></li>
+        <li><input type="button" onclick = "chgColor('blue')" value = "  " style = "background:blue;"></li>
+        <li><input type="button" onclick = "chgColor('orange')" value = "  " style = "background:orange;"></li>
+    </ul>
+    <input type="reset" onclick = "init()"></button>
+    <script>init();</script>
+</body>
 </html>

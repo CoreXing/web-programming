@@ -1,173 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
-    <style>
-        del{
-            background:tomato
-        }
-        ins{
-            background:yellow
-        }
-        div.content{
-            overflow:auto;
-            resize:both;
-            width:80%;
-        }
-        .green{
-            float:left;
-            width:50%;
-            background:mediumseagreen;
-        }
-        .blue{
-            float:right;
-            width:50%;
-            background:dodgerblue;
-        }
-        .photo_L{
-            float:left;
-            width:49%;
-
-            filter: brightness();
-        }
-        .photo_R{
-            float:right;
-            width:49%;
-        }
-        img.nochange{
-            border:2px red solid;
-        }
-        img.change{
-            border:2px red solid;
-            filter: sepia()
-        }
-        #nav{
-            margin: 15px auto;
-            height: 40px;
-            background-color: #690;
-        }
-        #nav li{
-            display:inline;
-            line-height: 40px;
-            color: #FFF;
-            padding: 20px 20px;
-        }
-        #nav a{
-            line-height: 40px;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 10px;
-        }
-        #nav a:hover{
-            background-color:#060;
-        }
-        #switch{
-            margin: 15px auto
-        }
-        #switch li{
-            display:inline;
-        }
-    </style>
-    <script>
-        function init(){
-            document.getElementById("score").width = "100px";
-            document.getElementById("score").border = 1;
-            var tr = document.getElementsByTagName("td");
-            for(var i=0;i<tr.length;i++){
-                tr[i].bgColor = "white";
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>cude move</title>
+        <style>
+            canvas{
+                border:1px solid #d3d3d3;
+                background-color: #f1f1f1;
             }
-        }
-        function chgTableW(number){
-            document.getElementById("score").width = number;
-        }
-        function chgBandSW(number){
-            document.getElementById("score").border = number;
-        }
-        function chgColor(color){
-            var tr = document.getElementsByTagName("td");
-            for(var i=3;i<tr.length;i++){
-                tr[i].bgColor = color;
-            }
-        }
-    </script>
-</head>
-<body>
-    <div>
-        <ul id = "nav">
-            <li><a href="hello.html">首頁</a></li>
-            <li><a href="test_file/test.html">課程介紹</a></li>
-            <li><a href="hello.html">師資陣容</a></li>
-            <li><a href="hello.html">新聞動態</a></li>
-            <li><a href="hello.html">其他內容</a></li>
-        </ul>
-    </div>
-    <div>
-        <p>
-            It is <del>red</del> and <ins>yellow</ins>.
-        </p>
-        <div class = "content">
-            <div class = "green">
-                <ul>
-                    <li>List1</li>
-                    <li>List2</li>
-                </ul>
-            </div>
-            <div class = "blue">
-                <ol>
-                    <li>List1</li>
-                    <li>List2</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class = "photo_L">
-            <img class = "nochange"src="鯊魚.jpg" width = 100%>
-        </div>
-        <div class = "photo_R">
-            <img class = "change" src="鯊魚.jpg" width = 100%>
-        </div>
-    </div>
+        </style>
+    </head>
+    <body onload="startGame()">
+        <script>
+            var redGamePiece, blueGamePiece, yellowGamePiece;
 
-    <table id = "score">
-        <tr align="center">
-            <td>75</td>
-            <td>80</td>
-            <td>90</td>
-        </tr>
-        <tr>
-            <td>95</td>
-            <td>80</td>
-            <td>70</td>
-        </tr>
-        <tr>
-            <td>100</td>
-            <td>98</td>
-            <td>60</td>
-        </tr>
-    </table>
-    <p>Table Width</p>
-    <ul id = "switch">
-        <li><input type="button" onclick = "chgTableW(200)" value = "200px"></li>
-        <li><input type="button" onclick = "chgTableW(500)" value = "500px"></li>
-    </ul>
-    <p>Border and Spacing width</p>
-    <ul id = "switch">
-        <li><input type="button" onclick = "chgBandSW(1)" value = "1px"></li>
-        <li><input type="button" onclick = "chgBandSW(10)" value = "10px"></li>
-        <li><input type="button" onclick = "chgBandSW(20)" value = "20px"></li>
-    </ul>
-    <p>Color</p>
-    <ul id = "switch">
-        <li><input type="button" onclick = "chgColor('green')" value = "  " style = "background:green;"></li>
-        <li><input type="button" onclick = "chgColor('yellow')" value = "  " style = "background:yellow;"></li>
-        <li><input type="button" onclick = "chgColor('blue')" value = "  " style = "background:blue;"></li>
-        <li><input type="button" onclick = "chgColor('orange')" value = "  " style = "background:orange;"></li>
-    </ul>
-    <input type="reset" onclick = "init()"></button>
-    <script>init();</script>
-</body>
+            function startGame() {
+                redGamePiece = new component(75, 75, "red", 10, 10);
+                yellowGamePiece = new component(75, 75, "yellow", 50, 60);
+                blueGamePiece = new component(75, 75, "blue", 10, 220);
+                myGameArea.start();
+            }
+
+            var myGameArea = {
+                canvas : document.createElement("canvas"),
+                start : function() {
+                    redDirection = 0;
+                    blueDirection_x = 0;
+                    blueDirection_y = 1;
+                    yellowDirection_x = 0;
+                    yellowDirection_y = 0;
+                    this.canvas.width = 480;
+                    this.canvas.height = 270;
+                    this.context = this.canvas.getContext("2d");
+                    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                    this.interval = setInterval(updateGameArea, 20);
+                },
+                clear : function() {
+                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                }
+            }
+
+            function component(width, height, color, x, y) {
+                this.width = width;
+                this.height = height;
+                this.x = x;
+                this.y = y;
+                this.update = function(){
+                    ctx = myGameArea.context;
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+
+            function updateGameArea(){
+                myGameArea.clear();
+                if(redDirection == 0){
+                    redGamePiece.x += 2;
+                    if(redGamePiece.x >= (480-75)){
+                        redDirection = 1;
+                    }
+                }
+                else{
+                    redGamePiece.x -= 2;
+                    if(redGamePiece.x <= 0){
+                        redDirection = 0;
+                    }
+                }
+                if(yellowDirection_x == 0){
+                    yellowGamePiece.x += 2;
+                    if(yellowGamePiece.x >= (480-75)){
+                        yellowDirection_x = 1;
+                    }
+                }
+                else{
+                    yellowGamePiece.x -= 2;
+                    if(yellowGamePiece.x <= 0){
+                        yellowDirection_x = 0;
+                    }
+                }
+                if(yellowDirection_y == 0){
+                    yellowGamePiece.y += 2;
+                    if(yellowGamePiece.y >= (270-75)){
+                        yellowDirection_y = 1;
+                    }
+                }
+                else{
+                    yellowGamePiece.y -= 2;
+                    if(yellowGamePiece.y <= 0){
+                        yellowDirection_y = 0;
+                    }
+                }
+                if(blueDirection_x == 0){
+                    blueGamePiece.x += 2;
+                    if(blueGamePiece.x >= (480-75)){
+                        blueDirection_x = 1;
+                    }
+                }
+                else{
+                    blueGamePiece.x -= 2;
+                    if(blueGamePiece.x <= 0){
+                        blueDirection_x = 0;
+                    }
+                }
+                if(blueDirection_y == 0){
+                    blueGamePiece.y += 2;
+                    if(blueGamePiece.y >= (270-75)){
+                        blueDirection_y = 1;
+                    }
+                }
+                else{
+                    blueGamePiece.y -= 2;
+                    if(blueGamePiece.y <= 0){
+                        blueDirection_y = 0;
+                    }
+                }
+                redGamePiece.update();
+                yellowGamePiece.update();
+                blueGamePiece.update();
+            }
+            </script>
+
+    </body>
 </html>

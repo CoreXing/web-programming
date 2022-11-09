@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function drawCircle(){
+            var c = document.getElementById("myCanvas_cycle");
+            var ctx = c.getContext("2d");
+
+            ctx.strokeStyle = '#376b4d';
+            ctx.lineWidth = 10;
+
+            var grd = ctx.createLinearGradient(0,0,200,0);
+            grd.addColorStop(0,"#376b4d");
+            grd.addColorStop(1,"#fcba03");
+            ctx.fillStyle = grd;
+
+            ctx.beginPath();
+            ctx.arc(100,100,50,0,2*Math.PI,true);
+            ctx.closePath();
+
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "#FFFFFF"
+            ctx.fillText("Hi", 100, 100);
+        }
+    </script>
+</head>
+<body>
+    <canvas id="test1" width="200" height="100" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+    <br/>
+    <input type="button" value="draw Circle" onclick="drawCircle();">
+    <br/>
+    <canvas id="myCanvas_cycle" width="400" height="200" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+    <br/>
+    <canvas id="try" width="400" height="200" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+
+    <script>
+        var canvas = document.getElementById("test1");
+        var context = canvas.getContext("2d");
+
+        context.fillStyle = "#FF0000";
+        context.fillRect(0,0,150,50);
+
+        context.fillStyle = "rgba(0,0,200,0.5)";
+        context.fillRect(50,25,150,50);
+    </script>
+    <script>
+        var canvas = document.getElementById("try");
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(0,0,200,100);
+
+        ctx.fillStyle = "rgba(0,0,200,0.5)";
+        ctx.fillRect(100,50,200,100);
+
+        ctx.moveTo(0, 110);
+        ctx.lineTo(90, 110);
+        ctx.fillStyle = "#FF0000";
+        ctx.stroke();
+        ctx.moveTo(90, 110);
+        ctx.lineTo(90, 160);
+        ctx.fillStyle = "#FF0000";
+        ctx.stroke();
+        ctx.moveTo(90, 160);
+        ctx.lineTo(310, 160);
+        ctx.fillStyle = "#FF0000";
+        ctx.stroke();
+
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "orange"
+        ctx.fillText("Hello!", 110, 90);
+
+
+        ctx.strokeStyle = '#376b4d';
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.arc(305,45,20,0.5*Math.PI,1*Math.PI,true);
+        ctx.stroke();
+    </script>
+</body>
+</html>
