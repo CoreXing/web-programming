@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>cude move</title>
+        <style>
+            canvas{
+                border:1px solid #d3d3d3;
+                background-color: #f1f1f1;
+            }
+            #switch{
+                margin: 15px auto;
+                padding-left: 8px;
+            }
+            #switch li{
+                display:inline;
+            }
+            input{
+                width:30px;
+                height:30px;
+                background:#00C200;
+                color:#FFF;
+            }
+            input.reset{
+                width:50px;
+                background:#F00000;
+            }
+            div{
+                align-content:center;
+            }
+        </style>
+    </head>
+    <body align="center">
+        <h2 id = "score">score: 0</h2>
+        <p>請按下開始</p>
+        <canvas id="canvas">Where is my midterm project score!</canvas>
+        <ul id = "switch">
+            <li><input type="button" onclick = "start()" value = "▶"></li>
+            <li><input type="button" onclick = "left()" value = "←"></li>
+            <li><input type="button" onclick = "right()" value = "→"></li>
+            <li><input type="button" onclick = "rotate()" value = "⟳"></li>
+            <li><input class = "reset" type="button" onclick = "window.location.reload()" value = "reset"></li>
+        </ul>
+        <script>
+            canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var min = 0
+            canvas.width = 200;
+            canvas.height = 400;
+            setInterval(updateGameArea,1000);
+            var mouse_x = false;
+            var mouse_y = false;
+            window.addEventListener('mousedown', function (e) {
+                mouse_x = e.pageX;
+                mouse_y = e.pageY;
+            })
+            window.addEventListener('mouseup', function (e) {
+                mouse_x = false;
+                mouse_y = false;
+            })
+            window.addEventListener('touchstart', function (e) {
+                mouse_x = e.pageX;
+                mouse_y = e.pageY;
+            })
+            window.addEventListener('touchend', function (e) {
+                mouse_x = false;
+                mouse_y = false;
+            })
+
+            function updateGameArea(){
+                ctx.clearRect(0,0,200,400);
+                for(let i=1;i<20;i++){
+                    ctx.strokeStyle = "#c9c9c9";
+                    ctx.moveTo(0, i*20);
+                    ctx.lineTo(200, i*20);
+                }
+                for(let i=1;i<10;i++){
+                    ctx.strokeStyle = "#c9c9c9";
+                    ctx.moveTo(i*20, 0);
+                    ctx.lineTo(i*20, 400);
+                }
+                ctx.stroke();
+                if(mouse_x && mouse_y){
+                    for(let i=0;i<Piece.length;i++){
+                        if (Piece[i].clicked()) {
+                            min = i;
+                        }
+                    }
+                }
+                Piece[min].sidebar();
+                for(let i=0;i<Piece.length;i++){
+                    document.getElementById("score").innerHTML = "score: "+Piece.length;
+                    Piece[i].update();
+                }
+            }
+
+            function component(share) {
+                this.width = 20;
+                this.height = 20;
+                this.x = 80;
+                this.y = -40;
+                this.spare = share;
+                this.init = function(){
+                    if(this.spare==0){
+                        ctx.fillStyle = "#008F8F";
+                        ctx.fillRect(this.x, this.y, this.width*3, this.height);
+                        ctx.fillRect(this.x, this.y, this.width, this.height*4);
+                        ctx.fillRect(this.x, this.y+60, this.width*3, this.height);
+                    }
+                    if(this.spare==1){
+                        ctx.fillStyle = "#00E000";
+                        ctx.fillRect(this.x, this.y, this.width*2, this.height);
+                        ctx.fillRect(this.x, this.y, this.width, this.height*3);
+                        ctx.fillRect(this.x, this.y+20*2, this.width*2, this.height);
+                        ctx.fillRect(this.x+20, this.y+20*3, this.width, this.height*2);
+                        ctx.fillRect(this.x, this.y+20*4, this.width, this.height);
+                    }
+                    if(this.spare==2){
+                        ctx.fillStyle = "#FFFF26";
+                        ctx.fillRect(this.x, this.y, this.width, this.height*4);
+                    }
+                    if(this.spare==3){
+                        ctx.fillStyle = "#A326FF";
+                        ctx.fillRect(this.x, this.y, this.width*2, this.height);
+                        ctx.fillRect(this.x, this.y, this.width, this.height*3);
+                        ctx.fillRect(this.x, this.y+20*2, this.width*2, this.height);
+                        ctx.fillRect(this.x, this.y+20*3, this.width, this.height*2);
+                        ctx.fillRect(this.x, this.y+20*4, this.width*2, this.height);
+                    }
+                    if(this.spare==4){
+                        ctx.fillStyle = "#FF26FF";
+                        ctx.fillRect(this.x, this.y, this.width*2, this.height*2);
+                    }
+                    if(this.spare==5){
+                        ctx.fillStyle = "#000000";
+                        ctx.fillRect(this.x, this.y, this.width*3, this.height);
+                        ctx.fillRect(this.x+20, this.y, this.width, this.height*2);
+                    }
+                    if(this.spare==6){
+                        ctx.fillStyle = "#FFB326";
+                        ctx.fillRect(this.x+20, this.y, this.width, this.height*2);
+                        ctx.fillRect(this.x, this.y+20, this.width, this.height*2);
+                    }
+                    if(this.spare==7){
+                        ctx.fillStyle = "#805300";
+                        ctx.fillRect(this.x, this.y, this.width*2, this.height);
+                        ctx.fillRect(this.x, this.y, this.width, this.height*3);
+                    }
+                }
+                this.update = function(){
+                    this.init();
+                    if(this.y<=400){
+                        this.y = this.y+20
+                    }
+                    if(this.y==400){
+                        min = min + 1;
+                    }
+                    if(this.y==100){
+                        if(Piece.length>=4){
+                            Piece.push(new component(Math.floor(Math.random()*8)));
+                        }else{
+                            Piece.push(new component(share+1));
+                        }
+                    }
+                }
+                this.sidebar = function(){
+                    if(this.spare==0){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*3+2, this.height+2);
+                        ctx.fillRect(this.x-1, this.y-1, this.width+2, this.height*4+2);
+                        ctx.fillRect(this.x-1, this.y+60-1, this.width*3+2, this.height+2);
+                    }
+                    if(this.spare==1){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*2+2, this.height+2);
+                        ctx.fillRect(this.x-1, this.y-1, this.width+2, this.height*3+2);
+                        ctx.fillRect(this.x-1, this.y+20*2-1, this.width*2+2, this.height+2);
+                        ctx.fillRect(this.x+20-1, this.y+20*3-1, this.width+2, this.height*2+2);
+                        ctx.fillRect(this.x-1, this.y+20*4-1, this.width+2, this.height+2);
+                    }
+                    if(this.spare==2){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width+2, this.height*4+2);
+                    }
+                    if(this.spare==3){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*2+2, this.height+2);
+                        ctx.fillRect(this.x-1, this.y-1, this.width+2, this.height*3+2);
+                        ctx.fillRect(this.x-1, this.y+20*2-1, this.width*2+2, this.height+2);
+                        ctx.fillRect(this.x-1, this.y+20*3-1, this.width+2, this.height*2+2);
+                        ctx.fillRect(this.x-1, this.y+20*4-1, this.width*2+2, this.height+2);
+                    }
+                    if(this.spare==4){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*2+2, this.height*2+2);
+                    }
+                    if(this.spare==5){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*3+2, this.height+2);
+                        ctx.fillRect(this.x+20-1, this.y-1, this.width+2, this.height*2+2);
+                    }
+                    if(this.spare==6){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x+20-1, this.y-1, this.width+2, this.height*2+2);
+                        ctx.fillRect(this.x-1, this.y+20-1, this.width+2, this.height*2+2);
+                    }
+                    if(this.spare==7){
+                        ctx.fillStyle = "#E60000";
+                        ctx.fillRect(this.x-1, this.y-1, this.width*2+2, this.height+2);
+                        ctx.fillRect(this.x-1, this.y-1, this.width+2, this.height*3+2);
+                    }
+                }
+                this.rightMove = function(){
+                    this.x = this.x + 20;
+                }
+                this.leftMove = function(){
+                    this.x = this.x - 20;
+                }
+                this.clicked = function(){
+                    var clicked = true;
+                    if(this.spare==0){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*3)||(mouse_y<this.y)||(mouse_x>this.y+20*4)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==1){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*2)||(mouse_y<this.y)||(mouse_x>this.y+20*5)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==2){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20)||(mouse_y<this.y)||(mouse_x>this.y+20*4)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==3){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*3)||(mouse_y<this.y)||(mouse_x>this.y+20*5)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==4){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*2)||(mouse_y<this.y)||(mouse_x>this.y+20*2)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==5){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*3)||(mouse_y<this.y)||(mouse_x>this.y+20*2)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==6){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*2)||(mouse_y<this.y)||(mouse_x>this.y+20*3)){
+                            clicked = false;
+                        }
+                    }
+                    if(this.spare==7){
+                        if((mouse_x<this.x)||(mouse_x>this.x+20*2)||(mouse_y<this.y)||(mouse_x>this.y+20*3)){
+                            clicked = false;
+                        }
+                    }
+                    return clicked;
+                }
+            }
+            function start(){
+                Piece = [new component(0)]
+            }
+            function right(){
+                Piece[min].rightMove();
+            }
+            function left(){
+                Piece[min].leftMove();
+            }
+        </script>
+    </body>
+</html>
